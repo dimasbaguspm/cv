@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dimas Bagus Prayogo Mukti — Software Developer</title>
+    <meta
+      name="description"
+      content="CV for Dimas Bagus Prayogo Mukti, Software Developer specializing in modern web interfaces."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/index.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Plus Jakarta Sans", "ui-sans-serif", "system-ui"],
+            },
+            colors: {
+              brand: {
+                50: "#eff6ff",
+                100: "#dbeafe",
+                200: "#bfdbfe",
+                300: "#93c5fd",
+                400: "#60a5fa",
+                500: "#3b82f6",
+                600: "#2563eb",
+                700: "#1d4ed8",
+                800: "#1e40af",
+                900: "#1e3a8a",
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <script defer src="scripts/index.js"></script>
+  </head>
+  <body class="bg-white text-slate-900 antialiased">
+    <button
+      type="button"
+      class="print-action fixed bottom-6 right-6 z-40 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-lg transition hover:border-slate-900 hover:text-brand-700 print-hidden"
+    >
+      Print
+    </button>
+    <main
+      class="mx-auto flex min-h-screen max-w-4xl flex-col gap-10 px-6 py-12 sm:px-10 lg:py-16"
+    >
+      <header class="space-y-3 border-b border-slate-200 pb-6">
+        <h1 class="text-4xl font-semibold text-slate-900">
+          Dimas Bagus Prayogo Mukti
+        </h1>
+        <p class="text-lg text-slate-700">Software Developer (Indonesia)</p>
+        <div class="flex flex-wrap gap-3 text-sm text-slate-600">
+          <a class="hover:text-brand-700" href="mailto:dimas.bagus.pm@gmail.com"
+            >dimas.bagus.pm@gmail.com</a
+          >
+          <span class="hidden sm:inline">·</span>
+          <a class="hover:text-brand-700" href="tel:+6287748207313"
+            >+62 877-4820-7313</a
+          >
+          <span class="hidden sm:inline">·</span>
+          <a
+            class="hover:text-brand-700"
+            href="https://linkedin.com/in/dimasbaguspm"
+            target="_blank"
+            rel="noreferrer"
+            >linkedin.com/in/dimasbaguspm</a
+          >
+          <span class="hidden sm:inline">·</span>
+          <a
+            class="hover:text-brand-700"
+            href="https://github.com/dimasbaguspm"
+            target="_blank"
+            rel="noreferrer"
+            >github.com/dimasbaguspm</a
+          >
+        </div>
+      </header>
+
+      <section class="space-y-3">
+        <h2 class="section-heading">Profile</h2>
+        <p class="text-sm leading-relaxed text-slate-700">
+          Software developer and team lead with a proven track record in
+          delivering robust, user-focused web applications and scalable backend
+          services. Experienced in React, Angular, Elysia, NestJS, and Express,
+          with strong database skills in Postgres and Redis. Adept at building
+          and evolving design systems, optimizing CI/CD pipelines, and driving
+          quality improvements. Recognized for collaborative leadership,
+          effective mentoring, and clear communication, with a commitment to
+          fostering high-performing teams and delivering business value through
+          technology.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="section-heading">Achievement</h2>
+        <ul class="list-disc space-y-1 pl-5 text-sm text-slate-700">
+          <li>Reapit Global Hackathon 2025 — People’s Choice Winner</li>
+          <li>Top 5 Developer Performer in SoftwareSeni 2025</li>
+        </ul>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="section-heading">Work Experience</h2>
+        <div class="space-y-6">
+          <div class="space-y-2">
+            <div
+              class="flex flex-wrap items-baseline justify-between gap-2 text-sm text-slate-600"
+            >
+              <span class="font-semibold text-slate-900"
+                >Software Developer Team Leader · SoftwareSeni</span
+              >
+              <span>Mar 2025 — Present</span>
+            </div>
+            <ul class="list-disc space-y-1 pl-5 text-sm text-slate-700">
+              <li>
+                Tech lead for a property tech platform; guide architecture and
+                delivery for core web experiences.
+              </li>
+              <li>
+                Maintain growth paths for 5 junior/mid developers through
+                pairing, code reviews, and goal setting.
+              </li>
+              <li>
+                Coordinate with product/design to keep releases on track while
+                safeguarding quality and performance.
+              </li>
+              <li>
+                Led a huge app codebase with 24 packages; tightened checks so
+                build success rose from ~70% to 98%.
+              </li>
+            </ul>
+          </div>
+
+          <div class="space-y-2">
+            <div
+              class="flex flex-wrap items-baseline justify-between gap-2 text-sm text-slate-600"
+            >
+              <span class="font-semibold text-slate-900"
+                >React Developer · SoftwareSeni</span
+              >
+              <span>Dec 2021 — Mar 2025</span>
+            </div>
+            <ul class="list-disc space-y-1 pl-5 text-sm text-slate-700">
+              <li>
+                Built and shipped frontend features in React/TypeScript with
+                strong attention to accessibility.
+              </li>
+              <li>
+                Introduced component reuse and design tokens to speed UI
+                delivery and reduce defects.
+              </li>
+              <li>
+                Partnered with backend/data to instrument analytics and improve
+                page performance.
+              </li>
+              <li>
+                Provided code reviews, kept tests green, and prevented
+                dependency issues across teams.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="section-heading">Language</h2>
+        <ul class="space-y-3 text-sm text-slate-700">
+          <li>
+            <span class="font-semibold text-slate-900">English</span> —
+            Upper-intermediate proficiency; able to communicate fluently and
+            confidently in professional and social settings with international
+            colleagues and clients.
+          </li>
+          <li>
+            <span class="font-semibold text-slate-900">Indonesian</span> —
+            Native speaker with full professional proficiency.
+          </li>
+        </ul>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="section-heading">Portfolio</h2>
+        <ul class="space-y-3 text-sm text-slate-700">
+          <li>
+            <span class="font-semibold text-slate-900">Versaur</span>
+            — A modern React UI library featuring tree-shakable components
+            <a
+              class="ml-1 text-brand-700 hover:underline"
+              href="https://versaur.dimasbaguspm.com"
+              target="_blank"
+              rel="noreferrer"
+              >versaur.dimasbaguspm.com</a
+            >
+          </li>
+          <li>
+            <span class="font-semibold text-slate-900">Spenicle</span> —
+            Expense/income monitor with categorization, charts, and exports.
+            <a
+              class="ml-1 text-brand-700 hover:underline"
+              href="https://spenicle.dimasbaguspm.com"
+              target="_blank"
+              rel="noreferrer"
+              >spenicle.dimasbaguspm.com</a
+            >
+          </li>
+          <li>
+            <span class="font-semibold text-slate-900">Notunic</span> —
+            Structured note-taking with grouping, quick search, and
+            keyboard-first UX.
+            <a
+              class="ml-1 text-brand-700 hover:underline"
+              href="https://notunic.dimasbaguspm.com"
+              target="_blank"
+              rel="noreferrer"
+              >notunic.dimasbaguspm.com</a
+            >
+          </li>
+        </ul>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="section-heading">Skills & Tools</h2>
+        <div class="grid gap-3 text-sm text-slate-700">
+          <div class="space-y-3">
+            <p class="font-semibold text-slate-900">Frontend</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="tag">React</span>
+              <span class="tag">NextJS</span>
+              <span class="tag">Angular</span>
+              <span class="tag">Tailwind</span>
+              <span class="tag">Linaria</span>
+              <span class="tag">Styled Components</span>
+              <span class="tag">Vite</span>
+            </div>
+          </div>
+          <div class="space-y-3">
+            <p class="font-semibold text-slate-900">Backend</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="tag">Elysia</span>
+              <span class="tag">NestJS</span>
+              <span class="tag">Express</span>
+              <span class="tag">Drizzle</span>
+              <span class="tag">Postgres</span>
+              <span class="tag">Redis</span>
+              <span class="tag">Rollup</span>
+            </div>
+          </div>
+          <div class="space-y-3">
+            <p class="font-semibold text-slate-900">
+              Quality, Tooling, and Delivery
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="tag">Unit Test</span>
+              <span class="tag">Automation Testing</span>
+              <span class="tag">Server & Client Caching</span>
+              <span class="tag">Monitoring</span>
+              <span class="tag">Accessibility</span>
+              <span class="tag">Internationalization</span>
+              <span class="tag">Containerization</span>
+              <span class="tag">Git</span>
+              <span class="tag">Performance</span>
+              <span class="tag">Design System</span>
+              <span class="tag">PWA</span>
+              <span class="tag">Web Worker</span>
+              <span class="tag">Automation</span>
+              <span class="tag">CI/CD</span>
+              <span class="tag">Deployment</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="section-heading">Soft Skills</h2>
+        <div class="flex flex-wrap gap-2 text-sm text-slate-700">
+          <span class="tag">Team Leadership</span>
+          <span class="tag">Mentorship & Coaching</span>
+          <span class="tag">Cross-functional Collaboration</span>
+          <span class="tag">Problem Solving</span>
+          <span class="tag">Communication</span>
+          <span class="tag">Presentation</span>
+          <span class="tag">Stakeholder Coordination</span>
+          <span class="tag">Reliability & Ownership</span>
+        </div>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="section-heading">Education</h2>
+        <div class="space-y-2 text-sm text-slate-700">
+          <div class="flex flex-wrap items-baseline justify-between gap-2">
+            <span class="font-semibold text-slate-900"
+              >Yogyakarta State University — Geography Education
+              <span class="text-slate-600">(2018–2023)</span></span
+            >
+            <span class="text-slate-600">GPA 3.64</span>
+          </div>
+          <ul class="list-disc space-y-1 pl-5">
+            <li>
+              Demonstrated progressive leadership in the Semarak Geografi
+              Tingkat Nasional event series: contributed as an IT team member
+              (2019), led a 7-person IT team to deliver a successful online
+              event using Moodle (2020), and managed a 30+ person organizing
+              committee, ensuring smooth event execution (2021).
+            </li>
+            <li>
+              Supported hands-on learning by assisting in Geographic Information
+              Systems and Remote Sensing practicums, helping students develop
+              technical and analytical skills in geospatial technologies.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="section-heading">Feedback</h2>
+        <div class="space-y-2 text-sm text-slate-700">
+          <p>
+            “Natural Team Lead quality and delivers great results with minimal
+            guidance.” — Nov 2025
+          </p>
+          <p>
+            “Very efficient and knowledgeable; strong problem-solving with
+            unique ideas.” — Jan 2025
+          </p>
+        </div>
+      </section>
+
+      <section class="space-y-3 border-t border-slate-200 pt-6">
+        <p class="text-sm text-slate-700">
+          For detailed project notes, and recent updates, visit
+          <a
+            class="text-brand-700 hover:underline"
+            href="https://linkedin.com/in/dimasbaguspm"
+            target="_blank"
+            rel="noreferrer"
+            >linkedin.com/in/dimasbaguspm</a
+          >.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>

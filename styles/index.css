@@ -1,0 +1,104 @@
+/* Custom touches layered on top of Tailwind CDN build */
+:root {
+  color-scheme: light;
+}
+
+body {
+  background: #ffffff;
+}
+
+.section-heading {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #1d4ed8;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.6rem;
+  border-radius: 9999px;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+}
+
+/* Smooth card hover without jitter */
+.tilt-card {
+  transform: translateY(0);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.tilt-card:hover {
+  transform: translateY(-2px);
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm 12mm 16mm 12mm;
+  }
+
+  :root {
+    color-scheme: light;
+  }
+
+  body {
+    background: #ffffff !important;
+  }
+
+  body::after,
+  .pointer-events-none,
+  .backdrop-blur {
+    display: none !important;
+  }
+
+  main,
+  header,
+  section,
+  article {
+    box-shadow: none !important;
+    background: #ffffff !important;
+    color: #0f172a !important;
+  }
+
+  a {
+    color: inherit !important;
+    text-decoration: underline;
+  }
+
+  main {
+    max-width: 190mm;
+    padding: 0;
+    margin: 0 auto;
+    gap: 18px !important;
+  }
+
+  header,
+  section,
+  footer {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  h1,
+  h2,
+  h3,
+  p,
+  ul,
+  li,
+  div,
+  span {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  ul {
+    padding-left: 18px;
+  }
+
+  .print-hidden {
+    display: none !important;
+  }
+}
