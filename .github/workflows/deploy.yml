@@ -42,7 +42,4 @@ jobs:
           VPS_PASSWORD: ${{ secrets.VPS_PASSWORD }}
         run: |
           # Start services on the VPS using docker compose (assumes docker & compose available)
-          # Pipe the sudo password to sudo (-S) so sudo won't prompt for a tty.
-          # NOTE: Secrets are masked in Actions logs. Consider granting passwordless sudo
-          # for the docker compose command on the VPS for improved security.
-          sshpass -p "$VPS_PASSWORD" ssh -o StrictHostKeyChecking=no -o ProxyCommand="cloudflared access ssh --hostname %h" $VPS_USER@$VPS_HOST "cd ~/cv && printf '%s\n' \"$VPS_PASSWORD\" | sudo -S docker compose up -d"
+          sshpass -p "$VPS_PASSWORD" ssh -o StrictHostKeyChecking=no -o ProxyCommand="cloudflared access ssh --hostname %h" $VPS_USER@$VPS_HOST "cd ~/cv && docker compose up -d"
