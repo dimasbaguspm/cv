@@ -1,0 +1,9 @@
+services:
+  cv:
+    image: nginx:alpine
+    container_name: cv
+    volumes:
+      - ./:/usr/share/nginx/html:ro
+    ports:
+      - "8000:80"
+    restart: unless-stopped
