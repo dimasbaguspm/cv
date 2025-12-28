@@ -34,3 +34,12 @@ jobs:
           # Use rsync over ssh routed through cloudflared to copy repo (exclude .git)
           RSYNC_SSH="sshpass -p '$VPS_PASSWORD' ssh -o StrictHostKeyChecking=no -o ProxyCommand=\"cloudflared access ssh --hostname %h\""
           rsync -avz --exclude '.git' -e "$RSYNC_SSH" ./ $VPS_USER@$VPS_HOST:~/cv
+
+      - name: Run `docker compose up -d` on VPS
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+          VPS_PASSWORD: ${{ secrets.VPS_PASSWORD }}
+        run: |
+          # Start services on the VPS using docker compose (assumes docker & compose available)
+          sshpass -p "$VPS_PASSWORD" ssh -o StrictHostKeyChecking=no -o ProxyCommand="cloudflared access ssh --hostname %h" $VPS_USER@$VPS_HOST "cd ~/cv && docker compose up -d"
