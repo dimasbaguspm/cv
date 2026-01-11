@@ -1,12 +1,8 @@
-name: Deploy
+name: Deploy via Pangolin
 
 on:
   push:
     branches: [main]
-  workflow_dispatch:
-
-env:
-  CI: true
 
 jobs:
   deploy:
@@ -14,32 +10,30 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Setup cloudflared
-        uses: AnimMouse/setup-cloudflared@v2
 
-      - name: Install rsync and sshpass
+      - name: Prepare Newt
         run: |
-          sudo apt-get update
-          sudo apt-get install -y rsync sshpass
+          # Official installer script
+          curl -fsSL https://raw.githubusercontent.com/fosrl/newt/main/get-newt.sh | bash
+          echo "/usr/local/bin" >> $GITHUB_PATH
 
-      - name: Copy source to VPS via cloudflared (rsync over SSH using password)
-        env:
-          VPS_HOST: ${{ secrets.VPS_HOST }}
-          VPS_USER: ${{ secrets.VPS_USER }}
-          VPS_PASSWORD: ${{ secrets.VPS_PASSWORD }}
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Deploy
         run: |
-          # Ensure remote directory exists
-          sshpass -p "$VPS_PASSWORD" ssh -o StrictHostKeyChecking=no -o ProxyCommand="cloudflared access ssh --hostname %h" $VPS_USER@$VPS_HOST "mkdir -p ~/cv"
+          # 1. Define the tunnel (Keep credentials in secrets!)
+          PROXY="newt connect --id ${{ secrets.NEWT_ID }} --secret ${{ secrets.NEWT_SECRET }} --endpoint ${{ secrets.NEWT_ENDPOINT }} --resource-id ${{ secrets.SSH_RESOURCE_ID }} --pipe"
 
-          # Use rsync over ssh routed through cloudflared to copy repo (exclude .git)
-          RSYNC_SSH="sshpass -p '$VPS_PASSWORD' ssh -o StrictHostKeyChecking=no -o ProxyCommand=\"cloudflared access ssh --hostname %h\""
-          rsync -avz --exclude '.git' -e "$RSYNC_SSH" ./ $VPS_USER@$VPS_HOST:~/cv
+          echo "--- Syncing files ---"
+          rsync -avz --exclude '.git' \
+            -e "ssh -o StrictHostKeyChecking=no -o ProxyCommand='$PROXY'" \
+            ./ kyrielle@localhost:~/cv
 
-      - name: Run `docker compose up -d` on VPS
-        env:
-          VPS_HOST: ${{ secrets.VPS_HOST }}
-          VPS_USER: ${{ secrets.VPS_USER }}
-          VPS_PASSWORD: ${{ secrets.VPS_PASSWORD }}
-        run: |
-          # Start services on the VPS using docker compose (assumes docker & compose available)
-          sshpass -p "$VPS_PASSWORD" ssh -o StrictHostKeyChecking=no -o ProxyCommand="cloudflared access ssh --hostname %h" $VPS_USER@$VPS_HOST "cd ~/cv && docker compose up -d"
+          echo "--- Running Docker ---"
+          ssh -o StrictHostKeyChecking=no -o ProxyCommand="$PROXY" kyrielle@localhost << EOF
+            cd ~/cv
+            docker compose up -d
+          EOF
