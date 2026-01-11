@@ -7,33 +7,36 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      VPS_HOST: ${{ secrets.VPS_HOST }}
+      VPS_USER: ${{ secrets.VPS_USER }}
+      PORT: 2222
+      DIR: "~/cv"
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Prepare Newt
-        run: |
-          # Official installer script
-          curl -fsSL https://raw.githubusercontent.com/fosrl/newt/main/get-newt.sh | bash
-          echo "/usr/local/bin" >> $GITHUB_PATH
 
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Deploy
+      - name: Deploy and Restart
         run: |
-          # 1. Define the tunnel (Keep credentials in secrets!)
-          PROXY="newt connect --id ${{ secrets.NEWT_ID }} --secret ${{ secrets.NEWT_SECRET }} --endpoint ${{ secrets.NEWT_ENDPOINT }} --resource-id ${{ secrets.SSH_RESOURCE_ID }} --pipe"
+          mkdir -p ~/.ssh
+          ssh-keyscan -p ${{ env.PORT }} ${{ env.VPS_HOST }} >> ~/.ssh/known_hosts
 
-          echo "--- Syncing files ---"
-          rsync -avz --exclude '.git' \
-            -e "ssh -o StrictHostKeyChecking=no -o ProxyCommand='$PROXY'" \
-            ./ kyrielle@localhost:~/cv
+          # 2. Sync files (Delete files on remote that aren't in Git)
+          echo "--- Syncing files to Homelab ---"
+          rsync -avz --delete --exclude '.git' \
+            -e "ssh -p ${{ env.PORT }}" \
+            ./ ${{ env.VPS_USER }}@${{ env.VPS_HOST }}:${{ env.DIR }}
 
-          echo "--- Running Docker ---"
-          ssh -o StrictHostKeyChecking=no -o ProxyCommand="$PROXY" kyrielle@localhost << EOF
-            cd ~/cv
-            docker compose up -d
+          # 3. Run Docker commands on Homelab
+          echo "--- Rebuilding Containers ---"
+          ssh -p ${{ env.PORT }} ${{ env.VPS_USER }}@${{ env.VPS_HOST }} << EOF
+            cd ${{ env.DIR }}
+            docker compose up -d --build
+            docker image prune -f
           EOF
